@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatically track writing progress</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(45deg, #3B82F6, #107eb9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content a {
+            color: #4B5563;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #EDF2F7;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .logo-placeholder {
+            width: 120px;
+            height: 80px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 2px dashed #3B82F6;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .logo-placeholder::after {
+            content: 'Logo';
+            color: #3B82F6;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .logo-container {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: scroll 30s linear infinite;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+        }
+    </style>
+
+<nav class="bg-white shadow-md fixed w-full z-10">
+    <div class="container mx-auto px-6">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <a href="/src/pages/index.html class="flex items-center">
+                    <svg class="h-8 w-8 mr-2" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5L4 15V35L20 25L36 35V15L20 5Z" fill="#3B82F6"/>
+                        <path d="M20 5L36 15L20 25L4 15L20 5Z" fill="#60A5FA"/>
+                    </svg>
+                    <span class="text-gray-800 text-xl font-bold md:text-2xl">Mark My Words</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="/src/pages/index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                <div class="relative group">
+                    <button class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300 flex items-center">
+                        Solutions
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                        <div class="py-1 rounded-md bg-white transform">
+                            <a href="/src/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
+                            <a href="/src/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
+                            <a href="/src/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
+                            <a href="/src/segments/itmanager.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="/src/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
+                <a href="/src/blog/bloghome.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
+                <a href="/src/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
+                <a href="/src/contact.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
+                <a href="/src/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile menu, show/hide based on menu state -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="src/pages/rootindex.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
+            <a href="/src/pages/pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
+            <a href="/src/blog/bloghome.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Resources</a>
+            <a href="/src/ourmission.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Our Mission</a>
+            <a href="/src/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact Us</a>
+        </div>
+        <div class="pt-4 pb-3 border-t border-gray-200">
+            <div class="flex items-center px-5">
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Log In</a>
+            </div>
+            <div class="mt-3 px-2 space-y-1">
+                <a href="/src/signup.html" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="md:hidden bg-white shadow-md fixed inset-x-0 top-16 z-20 hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="/src/pages/index.html".html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
+        <div x-data="{ open: false }">
+            <button @click="open = !open" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 focus:outline-none">
+                Resources
+                <svg class="w-4 h-4 ml-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div x-data="{ open: false }">
+        </div>
+        <a href="/src/pages/about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">About</a>
+        <a href="/src/pages/contactus.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact</a>
+    </div>
+</div>
+
+<header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-32">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 animate__animated animate__fadeIn">
+                Moderate, give feedback, and track writing progress
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 animate__animated animate__fadeIn animate__delay-1s">
+                Mark My Words: A solution purposefully built to build writing capacity.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="/src/pages/bookingpage.html" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-blue-600 text-lg font-semibold hover:bg-blue-100 transition duration-300 animate__animated animate__fadeIn animate__delay-2s">
+                    Book Demo
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                <a href="/src/pages/contactus.html" class="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white text-white text-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300 animate__animated animate__fadeIn animate__delay-2s">
+                    Learn More
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <section class="py-12 bg-gray-50 mb-8"> <!-- Reduced py-16 to py-12 and mb-16 to mb-8 -->
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Key Platform Features</h2> <!-- Reduced mb-12 to mb-8 -->
+                <div class="grid md:grid-cols-3 gap-6"> <!-- Reduced gap-8 to gap-6 -->
+                    <!-- AI-Powered Assessment -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-blue-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">AI-Powered Assessment</h3>
+                        <p class="text-gray-600 mb-6">Customised AI that learns your school's marking style for consistent, fair evaluations.</p>
+                        <a href="/src/features/automaticannotations.html" class="text-blue-500 hover:text-blue-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Cross-Subject Tracking -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-green-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Cross-Subject Tracking</h3>
+                        <p class="text-gray-600 mb-6">Monitor writing progress across all subjects for a comprehensive view of student skills.</p>
+                        <a href="/src/features/crosssubject.html" class="text-green-500 hover:text-green-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Handwritten Work Integration -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-purple-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Handwritten Work Integration</h3>
+                        <p class="text-gray-600 mb-6">Easily upload and assess both typed and handwritten assignments in one place.</p>
+                        <a href="/src/features/handwritingtranscription.html" class="text-purple-500 hover:text-purple-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Multi-Format Feedback -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-yellow-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Multi-Format Feedback</h3>
+                        <p class="text-gray-600 mb-6">Deliver feedback in various engaging formats, including text, audio, and visual elements.</p>
+                        <a href="/src/features/multiformatfeedback.html" class="text-yellow-500 hover:text-yellow-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Data Analysis & Interventions -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-red-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Data Analysis & Interventions</h3>
+                        <p class="text-gray-600 mb-6">Gain insights from comprehensive data to inform targeted writing interventions.</p>
+                        <a href="/src/features/datatracking.html" class="text-red-500 hover:text-red-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Privacy & Data Protection -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-indigo-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Privacy & Data Protection</h3>
+                        <p class="text-gray-600 mb-6">Ensure student data safety with our secure, privacy-focused platform.</p>
+                        <a href="/src/features/lmsintegration.html" class="text-indigo-500 hover:text-indigo-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Customizable Frameworks -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-pink-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Customizable Frameworks</h3>
+                        <p class="text-gray-600 mb-6">Adapt the platform to your school's specific writing frameworks and standards.</p>
+                        <a href="/src/features/contextadaptive.html" class="text-pink-500 hover:text-pink-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Automated Initial Assessment -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-teal-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Automated Initial Assessment</h3>
+                        <p class="text-gray-600 mb-6">Quick, AI-powered initial assessments with the option for teacher review and adjustment.</p>
+                        <a href="/features/automated-assessment" class="text-teal-500 hover:text-teal-600 font-semibold">Learn More →</a>
+                    </div>
+        
+                    <!-- Personalized Learning Pathways -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-orange-100 rounded-full mb-6 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Personalised Learning Pathways</h3>
+                        <p class="text-gray-600 mb-6">Tailored learning suggestions based on individual student performance and needs.</p>
+                        <a href="/src/features/skilltrees.html" class="text-orange-500 hover:text-orange-600 font-semibold">Learn More →</a>
+                    </div>
+
+                     <!-- LMS Integration -->
+            <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                <div class="w-24 h-24 bg-cyan-100 rounded-full mb-6 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">LMS Integration</h3>
+                <p class="text-gray-600 mb-6">Seamlessly integrate with popular Learning Management Systems for streamlined workflows.</p>
+                <a href="/src/features/lmsintegration.html" class="text-cyan-500 hover:text-cyan-600 font-semibold">Learn More →</a>
+            </div>
+
+            <!-- Comprehensive Skill Evaluation -->
+            <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                <div class="w-24 h-24 bg-lime-100 rounded-full mb-6 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Comprehensive Skill Evaluation</h3>
+                <p class="text-gray-600 mb-6">Evaluate every skill on every assessment, providing detailed insights into student progress.</p>
+                <a href="/features/skill-evaluation" class="text-lime-500 hover:text-lime-600 font-semibold">Learn More →</a>
+            </div>
+
+            <!-- Bulk Text Upload -->
+            <div class="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center">
+                <div class="w-24 h-24 bg-fuchsia-100 rounded-full mb-6 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-fuchsia-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Bulk Text Upload</h3>
+                <p class="text-gray-600 mb-6">Easily upload and process multiple text documents simultaneously for efficient assessment.</p>
+                <a href="/src/features/bulktextupload.html" class="text-fuchsia-500 hover:text-fuchsia-600 font-semibold">Learn More →</a>
+                </div>
+            </div>
+        </section>
+</section>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/home" class="hover:text-blue-300 transition duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Features</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Resources</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <p>Email: support@teachease.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Address: 123 Education St, Teacher City, TC 12345</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Stay Connected</h3>
+                    <p class="mb-4">Join our community of educators and stay updated with the latest teaching innovations.</p>
+                    <form class="flex flex-col space-y-2">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Subscribe to Newsletter</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p>&copy; 2023 TeachEase. All rights reserved.</p>
+                <div class="mt-2">
+                    <a href="#" class="text-sm text-gray-400 hover:text-blue-300 mr-4">Privacy Policy</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-blue-300 mr-4">Terms of Service</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-blue-300">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+    
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+            });
+    
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+    
+            // Dropdown functionality
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const dropdownContent = toggle.nextElementSibling;
+                    // Close all other open dropdowns
+                    dropdownToggles.forEach(otherToggle => {
+                        if (otherToggle !== toggle) {
+                            otherToggle.nextElementSibling.classList.remove('show');
+                        }
+                    });
+    
+                    // Toggle the clicked dropdown
+                    dropdownContent.classList.toggle('show');
+                });
+            });
+    
+            // Close dropdowns when clicking outside
+            window.addEventListener('click', (e) => {
+                if (!e.target.matches('.dropdown-toggle') && !e.target.closest('.dropdown-content')) {
+                    const dropdowns = document.querySelectorAll('.dropdown-content');
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            });
+    
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+    
+            // Intersection Observer for feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+    
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        entry.target.style.opacity = 1;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+    
+            featureCards.forEach(card => {
+                observer.observe(card);
+            });
+    
+            // Typewriter effect for the hero title
+            const heroTitle = document.querySelector('#hero h1');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            let i = 0;
+    
+            function typeWriter() {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+    
+            setTimeout(typeWriter, 1000);  // Start typing after a 1-second delay
+    
+            // Handle window resize for dropdown behavior
+            let isMobile = window.innerWidth < 768;
+            window.addEventListener('resize', () => {
+                const newIsMobile = window.innerWidth < 768;
+                if (isMobile !== newIsMobile) {
+                    isMobile = newIsMobile;
+                    // Reset dropdowns on view change
+                    const dropdowns = document.querySelectorAll('.dropdown-content');
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

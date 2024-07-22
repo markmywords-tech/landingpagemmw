@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross-Subject Literacy Tracking - TeachEase for Educators</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(45deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<nav class="bg-white shadow-md fixed w-full z-10">
+    <div class="container mx-auto px-6">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center">
+                    <svg class="h-8 w-8 mr-2" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5L4 15V35L20 25L36 35V15L20 5Z" fill="#3B82F6"/>
+                        <path d="M20 5L36 15L20 25L4 15L20 5Z" fill="#60A5FA"/>
+                    </svg>
+                    <span class="text-gray-800 text-xl font-bold md:text-2xl">Mark My Words</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                <div class="relative group">
+                    <button class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300 flex items-center">
+                        Solutions
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                        <div class="py-1 rounded-md bg-white transform">
+                            <a href="/src/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
+                            <a href="/src/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
+                            <a href="/src/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
+                            <a href="/src/segments/itmanager.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="/src/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
+                <a href="/src/blog/bloghome.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
+                <a href="/src/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
+                <a href="/src/contact.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
+                <a href="/src/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile menu, show/hide based on menu state -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
+            <a href="/src/pages/pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
+            <a href="/src/blog/bloghome.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Resources</a>
+            <a href="/src/ourmission.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Our Mission</a>
+            <a href="/src/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact Us</a>
+        </div>
+        <div class="pt-4 pb-3 border-t border-gray-200">
+            <div class="flex items-center px-5">
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Log In</a>
+            </div>
+            <div class="mt-3 px-2 space-y-1">
+                <a href="/src/signup.html" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <svg class="h-8 w-8 mr-2" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 5L4 15V35L20 25L36 35V15L20 5Z" fill="#3B82F6"/>
+                            <path d="M20 5L36 15L20 25L4 15L20 5Z" fill="#60A5FA"/>
+                        </svg>
+                        <span class="text-gray-800 text-xl font-bold md:text-2xl">Mark My Words</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="/src/pages/index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                    <div class="relative group">
+                        <button class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300 flex items-center">
+                            Solutions
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                            <div class="py-1 rounded-md bg-white transform">
+                                <a href="/src/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
+                                <a href="/src/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
+                                <a href="/src/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
+                                <a href="/src/segments/itmanager.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/src/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
+                    <a href="/src/blog/bloghome.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
+                    <a href="/src/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
+                    <a href="/src/contact.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
+                    <a href="/src/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Solutions</a>
+                <a href="/src/pages/pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
+                <a href="/src/blog/bloghome.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Resources</a>
+                <a href="/src/ourmission.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Our Mission</a>
+                <a href="/src/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact Us</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                <div class="flex items-center px-5">
+                    <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Log In</a>
+                </div>
+                <div class="mt-3 px-2 space-y-1">
+                    <a href="/src/signup.html" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-32 pt-40"> <!-- Increased py-20 to py-32 and added pt-40 -->
+        <div class="container mx-auto px-6 mt-8"> <!-- Added mt-8 for extra top margin -->
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 animate__animated animate__fadeIn">
+                    Cross-Subject Literacy Tracking
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 animate__animated animate__fadeIn animate__delay-1s">
+                    Monitor and enhance student literacy across all academic disciplines.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="bg-white bg-opacity-20 rounded-lg px-4 py-2">
+                        <i class="fas fa-book-reader mr-2"></i> Comprehensive Monitoring
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg px-4 py-2">
+                        <i class="fas fa-chart-line mr-2"></i> Progress Tracking
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg px-4 py-2">
+                        <i class="fas fa-puzzle-piece mr-2"></i> Cross-Curricular Insights
+                    </div>
+                </div>
+                <a href="/src/pages/contactus.html" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-full hover:bg-blue-50 transition duration-300 animate__animated animate__fadeIn animate__delay-2s inline-block">
+                    Discover More
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+        <section id="explore-tracking" class="mb-20">
+            <h2 class="text-3xl font-semibold mb-10 text-center text-gray-800">Comprehensive Literacy Tracking Features</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full mb-6 flex items-center justify-center">
+                        <i class="fas fa-book-reader text-3xl text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Multi-Subject Integration</h3>
+                    <p class="text-gray-600">Track literacy skills across various subjects, from science to literature.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full mb-6 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-3xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Progress Analytics</h3>
+                    <p class="text-gray-600">Visualise student growth with detailed analytics and progress reports.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full mb-6 flex items-center justify-center">
+                        <i class="fas fa-tasks text-3xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Customisable Benchmarks</h3>
+                    <p class="text-gray-600">Set and adjust literacy benchmarks tailored to your curriculum and standards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-semibold mb-10 text-center text-gray-800">Key Benefits</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-green-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-700">Holistic view of student literacy development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-green-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-700">Early identification of literacy gaps</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-green-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-700">Targeted intervention strategies</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-green-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-700">Enhanced cross-curricular learning</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 bg-gradient-to-br from-blue-500 to-purple-600 p-8 text-white flex items-center">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4">Empower Literacy Across Subjects</h3>
+                            <p class="mb-6">Our cross-subject tracking tools help you nurture well-rounded, literate students in all academic areas.</p>
+                            <a href="/src/signup.html" class="bg-white text-blue-600 font-semibold py-2 px-6 rounded-full hover:bg-blue-50 transition duration-300">Start Tracking Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-semibold mb-10 text-center text-gray-800">Comprehensive Literacy Insights</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Subject-Specific Literacy Profiles</h3>
+                    <p class="text-gray-600">Generate detailed literacy profiles for each subject, highlighting strengths and areas for improvement.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Adaptive Assessment Tools</h3>
+                    <p class="text-gray-600">Utilise AI-driven assessments that adapt to each student's literacy level across subjects.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Collaborative Teacher Insights</h3>
+                    <p class="text-gray-600">Enable cross-department collaboration with shared literacy data and insights.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Personalised Learning Recommendations</h3>
+                    <p class="text-gray-600">Receive tailored suggestions for resources and activities to boost literacy in specific subjects.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16 rounded-xl shadow-md">
+            <h2 class="text-3xl font-semibold mb-4">Ready to Enhance Cross-Subject Literacy?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Experience the power of comprehensive literacy tracking with TeachEase. Elevate student performance across all subjects.</p>
+            <a href="/src/signup.html" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-full hover:bg-blue-50 transition duration-300">Start Your Free Trial</a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/src/pages/index.html" class="hover:text-blue-300 transition duration-300">Home</a></li>
+                        <li><a href="/src/pages/features.html" class="hover:text-blue-300 transition duration-300">Features</a></li>
+                        <li><a href="/src/blog/bloghome.html" class="hover:text-blue-300 transition duration-300">Resources</a></li>
+                        <li><a href="/src/pages/about.html" class="hover:text-blue-300 transition duration-300">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <p>Email: support@teachease.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Address: 123 Education St, Teacher City, TC 12345</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Stay Connected</h3>
+                    <p class="mb-4">Join our community of educators and stay updated with the latest teaching innovations.</p>
+                    <form class="flex flex-col space-y-2">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Subscribe to Newsletter</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p>&copy; 2023 TeachEase. All rights reserved.</p>
+                <div class="mt-2">
+                    <a href="#" class="text-sm text-gray-400 hover:text-blue-300 mr-4">Privacy Policy</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-blue-300 mr-4">Terms of Service</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-blue-300">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
