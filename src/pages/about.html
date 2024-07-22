@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Mark My Words</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(45deg, #3B82F6, #107eb9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content a {
+            color: #4B5563;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #EDF2F7;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <svg class="h-8 w-8 mr-2" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 5L4 15V35L20 25L36 35V15L20 5Z" fill="#3B82F6"/>
+                            <path d="M20 5L36 15L20 25L4 15L20 5Z" fill="#60A5FA"/>
+                        </svg>
+                        <span class="text-gray-800 text-xl font-bold md:text-2xl">Mark My Words</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                    <div class="relative group">
+                        <button class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300 flex items-center">
+                            Solutions
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                            <div class="py-1 rounded-md bg-white transform">
+                                <a href="/src/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
+                                <a href="/src/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
+                                <a href="/src/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
+                                <a href="/src/segments/itmanager.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/src/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
+                    <a href="/src/blog/bloghome.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
+                    <a href="/src/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
+                    <a href="/src/contact.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
+                    <a href="/src/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
+                <a href="/src/pages/pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
+                <a href="/src/blog/bloghome.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Resources</a>
+                <a href="/src/ourmission.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Our Mission</a>
+                <a href="/src/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact Us</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                <div class="flex items-center px-5">
+                    <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Log In</a>
+                </div>
+                <div class="mt-3 px-2 space-y-1">
+                    <a href="/src/signup.html" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-20 hidden">
+        <div class="flex justify-end p-4">
+            <button id="close-mobile-menu">
+                <i class="fas fa-times text-white text-2xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center space-y-6 pt-16">
+            <a href="#our-story" class="text-white text-xl hover:text-blue-300 transition duration-300">Our Story</a>
+            <a href="#our-team" class="text-white text-xl hover:text-blue-300 transition duration-300">Our Team</a>
+            <a href="#why-choose-us" class="text-white text-xl hover:text-blue-300 transition duration-300">Why Choose Us</a>
+            <a href="/src/blog/bloghome.html" class="text-white text-xl hover:text-blue-300 transition duration-300">Resources</a>
+            <a href="/src/pages/contactus.html" class="text-white text-xl hover:text-blue-300 transition duration-300">Contact</a>
+            <a href="#" class="text-blue-300 text-xl hover:text-blue-400 transition duration-300">Log In</a>
+            <a href="/src/signup.html" class="bg-blue-500 text-white px-6 py-2 rounded-md text-xl hover:bg-blue-600 transition duration-300">Sign Up</a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 pt-24 pb-16">
+        <section class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">About Mark My Words</h1>
+            <p class="text-xl text-gray-600 mb-8">
+                Revolutionising writing feedback in education, one student at a time.
+            </p>
+        </section>
+
+        <section id="our-story" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-6">Our Story</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <p class="text-gray-600 mb-4">
+                        Founded in 2020 by Dr. Emily Chen, a former Head of English with over 15 years of teaching experience, Mark My Words was born out of a passion for improving student writing and a frustration with traditional feedback methods.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        Dr. Chen recognized that while providing quality feedback is crucial for student growth, it often came at the cost of overwhelming workloads for teachers. This realization sparked the idea for an AI-powered writing assessment tool that could enhance the feedback process without sacrificing the personal touch that makes great teaching so impactful.
+                    </p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold mb-4">Our Mission</h3>
+                    <p class="text-gray-700">
+                        To empower educators with innovative tools that streamline the writing assessment process, allowing them to provide more meaningful, personalized feedback and ultimately foster a love for writing in students.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-choose-us" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-6">Why Choose Us?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="fas fa-brain text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">AI-Powered Insights</h3>
+                    <p class="text-gray-600">Our advanced AI analyzes writing patterns and provides detailed, actionable feedback.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="fas fa-users text-3xl text-green-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Educator-Centric Approach</h3>
+                    <p class="text-gray-600">Developed by teachers, for teachers, ensuring practical and relevant features.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="fas fa-chart-line text-3xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Continuous Improvement</h3>
+                    <p class="text-gray-600">Regular updates based on user feedback and the latest educational research.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6">Join Us in Revolutionising Education</h2>
+            <p class="text-xl text-gray-600 mb-8">
+                Experience the power of Mark My Words and see how it can transform your teaching practice.
+            </p>
+            <a href="#" class="bg-blue-500 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300">
+                Start Your Free Trial
+            </a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-blue-300 transition duration-300">Home</a></li>
+                        <li><a href="#our-story" class="hover:text-blue-300 transition duration-300">Our Story</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Terms & Conditions</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Blog</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">AI Education</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Study Guides</a></li>
+                        <li><a href="#" class="hover:text-blue-300 transition duration-300">Book a Demo</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="mt-4">&copy; 2024 Mark My Words. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                // Close

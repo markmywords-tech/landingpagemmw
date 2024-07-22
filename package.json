@@ -1,0 +1,19 @@
+{
+  "name": "mark-my-words",
+  "version": "1.0.0",
+  "description": "A writing feedback and progress tracking platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/css/input.css -o ./dist/output.css",
+    "watch": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
+    "dev": "npm run watch"
+  },
+  "keywords": ["education", "writing", "feedback"],
+  "author": "James Smith",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6"
+  }
+}

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .nav-link {
+    @apply text-gray-600 hover:text-primary transition duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300;
+  }
+  
+  .section-heading {
+    @apply text-3xl font-bold text-gray-800 mb-6 font-heading;
+  }
+  
+  .submenu {
+    @apply absolute hidden mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10;
+  }
+  
+  .submenu-item {
+    @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
+  }
+}
