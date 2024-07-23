@@ -21,8 +21,9 @@
     <nav class="bg-white shadow-md fixed w-full z-10">
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-center py-4">
+                <!-- Logo and brand name -->
                 <div class="flex items-center">
-                    <a href="index.html" class="flex items-center">
+                    <a href="/dist/index.html" class="flex items-center">
                         <svg class="h-8 w-8 mr-2" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M20 5L4 15V35L20 25L36 35V15L20 5Z" fill="#3B82F6"/>
                             <path d="M20 5L36 15L20 25L4 15L20 5Z" fill="#60A5FA"/>
@@ -30,8 +31,10 @@
                         <span class="text-gray-800 text-xl font-bold md:text-2xl">Mark My Words</span>
                     </a>
                 </div>
+                
+                <!-- Desktop menu -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                    <a href="/dist/index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
                     <div class="relative group">
                         <button class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300 flex items-center">
                             Solutions
@@ -39,22 +42,25 @@
                         </button>
                         <div class="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
                             <div class="py-1 rounded-md bg-white transform">
-                                <a href="/src/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
-                                <a href="/src/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
-                                <a href="/src/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
-                                <a href="/src/segments/itmanager.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
+                                <a href="/dist/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
+                                <a href="/dist/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
+                                <a href="/dist/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
+                                <a href="/dist/segments/englishteacher.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
                             </div>
                         </div>
                     </div>
-                    <a href="/src/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
-                    <a href="/src/blog/bloghome.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
-                    <a href="/src/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
-                    <a href="/src/contact.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
+                    <a href="/dist/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
+                    <a href="/dist/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
+                    <a href="/dist/pages/contactus.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
                 </div>
+                
+                <!-- Desktop login/signup buttons -->
                 <div class="hidden md:flex items-center space-x-3">
-                    <a href="app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
-                    <a href="/src/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
+                    <a href="https://app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
+                    <a href="/dist/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
                 </div>
+                
+                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -64,22 +70,22 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile menu, show/hide based on menu state -->
+        
+        <!-- Mobile menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Solutions</a>
-                <a href="/src/pages/pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
-                <a href="/src/blog/bloghome.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Resources</a>
-                <a href="/src/ourmission.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Our Mission</a>
-                <a href="/src/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact Us</a>
+                <a href="/dist/pages/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
+                <a href="/dist/pages/pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
+                <a href="/dist/blog/bloghome.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Resources</a>
+                <a href="/dist/ourmission.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Our Mission</a>
+                <a href="/dist/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact Us</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-200">
                 <div class="flex items-center px-5">
                     <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Log In</a>
                 </div>
                 <div class="mt-3 px-2 space-y-1">
-                    <a href="/src/signup.html" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Sign Up</a>
+                    <a href="/dist/signup.html" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Sign Up</a>
                 </div>
             </div>
         </div>

@@ -81,8 +81,9 @@
 <nav class="bg-white shadow-md fixed w-full z-10">
     <div class="container mx-auto px-6">
         <div class="flex justify-between items-center py-4">
+            <!-- Logo and brand name -->
             <div class="flex items-center">
-                <a href="/dist/pages/index.html" class="flex items-center">
+                <a href="/dist/index.html" class="flex items-center">
                     <svg class="h-8 w-8 mr-2" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 5L4 15V35L20 25L36 35V15L20 5Z" fill="#3B82F6"/>
                         <path d="M20 5L36 15L20 25L4 15L20 5Z" fill="#60A5FA"/>
@@ -90,8 +91,10 @@
                     <span class="text-gray-800 text-xl font-bold md:text-2xl">Mark My Words</span>
                 </a>
             </div>
+            
+            <!-- Desktop menu -->
             <div class="hidden md:flex items-center space-x-1">
-                <a href="dist/pages/index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                <a href="/dist/index.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
                 <div class="relative group">
                     <button class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300 flex items-center">
                         Solutions
@@ -102,19 +105,22 @@
                             <a href="/dist/segments/literacycoordinator.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Literacy Coordinators</a>
                             <a href="/dist/segments/headofenglish.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Faculty </a>
                             <a href="/dist/segments/schoolleader.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Heads of Curriculum</a>
-                            <a href="/dist/segments/itmanager.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
+                            <a href="/dist/segments/englishteacher.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">For Teachers</a>
                         </div>
                     </div>
                 </div>
                 <a href="/dist/pages/pricing.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a>
-                <a href="/dist/blog/bloghome.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resources</a>
                 <a href="/dist/ourmission.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Our Mission</a>
-                <a href="/dist//pages/contactus.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
+                <a href="/dist/pages/contactus.html" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Contact Us</a>
             </div>
+            
+            <!-- Desktop login/signup buttons -->
             <div class="hidden md:flex items-center space-x-3">
-                <a href="app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
+                <a href="https://app.markmywords.au" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Log In</a>
                 <a href="/dist/signup.html" class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Sign Up</a>
             </div>
+            
+            <!-- Mobile menu button -->
             <div class="md:hidden flex items-center">
                 <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +130,8 @@
             </div>
         </div>
     </div>
-    <!-- Mobile menu, show/hide based on menu state -->
+    
+    <!-- Mobile menu -->
     <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a href="/dist/pages/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
@@ -172,21 +179,6 @@
         document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 </script>
-
-<div id="mobile-menu" class="md:hidden bg-white shadow-md fixed inset-x-0 top-16 z-20 hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="dist/pages/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</a>
-        <div x-data="{ open: false }">
-            <button @click="open = !open" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 focus:outline-none">
-                Resources
-                <svg class="w-4 h-4 ml-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </div>
-        <div x-data="{ open: false }">
-        </div>
-        <a href="/dist/pages/about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">About</a>
-        <a href="/dist/pages/contactus.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact</a>
-    </div>
-</div>
 
 <section id="hero" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-32">
     <div class="container mx-auto px-6">
@@ -669,7 +661,7 @@ function toggleCard(element) {
                 </div>
                 <h3 class="text-xl font-semibold mb-4">Data Analysis & Interventions</h3>
                 <p class="text-gray-600 mb-6">Gain insights from comprehensive data to inform targeted writing interventions.</p>
-                <a href="/features/data-analysis" class="inline-flex items-center px-4 py-2 rounded-full text-white font-semibold transition-all duration-300" style="background: linear-gradient(to right, var(--primary-light), var(--primary-dark));">
+                <a href="/dist/features/datatracking.html" class="inline-flex items-center px-4 py-2 rounded-full text-white font-semibold transition-all duration-300" style="background: linear-gradient(to right, var(--primary-light), var(--primary-dark));">
                     Learn More
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -699,7 +691,7 @@ function toggleCard(element) {
 
 </section>
         <!-- "See More Features" button -->
-        <div class="text-center mt-12">
+        <div class="text-center mt-8">
             <a href="/dist/pages/features.html" class="inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300">
                 See More Features
             </a>
@@ -1020,4 +1012,22 @@ function toggleCard(element) {
         });
     </script>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+  
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+  
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        const isClickInside = mobileMenuButton.contains(event.target) || mobileMenu.contains(event.target);
+        if (!isClickInside && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+  </script>
 </html>

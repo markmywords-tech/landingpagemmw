@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "A writing feedback and progress tracking platform",
   "main": "index.js",
-"scripts": {
-  "build": "tailwindcss -i ./src/css/input.css -o ./dist/output.css && xcopy .\\src\\*.html .\\dist\\ /Y",
-  "dev": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
-  "start": "npx serve dist"
-}
+  "scripts": {
+    "build": "tailwindcss -i ./src/css/input.css -o ./dist/output.css && xcopy .\\src\\*.html .\\dist\\ /Y",
+    "dev": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
+    "start": "npx serve dist"
   },
   "keywords": ["education", "writing", "feedback"],
   "author": "James Smith",
@@ -17,3 +16,4 @@
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6"
   }
+}
