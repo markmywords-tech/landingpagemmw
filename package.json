@@ -1,12 +1,10 @@
-{
+﻿{
   "name": "mark-my-words",
   "version": "1.0.0",
   "description": "A writing feedback and progress tracking platform",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss -i ./src/css/input.css -o ./dist/output.css && xcopy .\\src\\*.html .\\dist\\ /Y",
-    "dev": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
-    "start": "npx serve dist"
+    "build": "tailwindcss -i ./src/css/input.css -o ./dist/output.css && powershell -Command \"Copy-Item -Path './src/*' -Destination './dist/' -Recurse -Force\""
   },
   "keywords": ["education", "writing", "feedback"],
   "author": "James Smith",
